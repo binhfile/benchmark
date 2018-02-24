@@ -34,6 +34,16 @@ static void BM_static_cast(benchmark::State &state) {
 }
 BENCHMARK(BM_static_cast);
 
+static void BM_pointer_call(benchmark::State &state) {
+    int cnt = 0;
+    C c;
+    for (auto _ : state) {
+        c.f(cnt);
+        benchmark::DoNotOptimize(cnt);
+    }
+}
+BENCHMARK(BM_pointer_call);
+
 static void BM_dynamic_cast_call(benchmark::State &state) {
     int cnt = 0;
     C c;
